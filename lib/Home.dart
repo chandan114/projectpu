@@ -2,9 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:projectpu2021/Feed.dart';
 import 'package:projectpu2021/signup.dart';
-// import 'package:puproject/signup.dart';
-// import './Feed.dart';
-// import './signup.dart';
+
 
 
 class Home extends StatelessWidget {

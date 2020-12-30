@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:projectpu2021/Feed.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 //void main() => runApp(MaterialApp(home: SignUp()));
 enum Gender { male, female }
@@ -46,7 +46,7 @@ class _SignUpState extends State<SignUp> {
 
   TextEditingController emailcon = TextEditingController();
   TextEditingController namecon = TextEditingController();
-  TextEditingController contact = TextEditingController();
+  TextEditingController enroll = TextEditingController();
   TextEditingController aadharcon = TextEditingController();
   TextEditingController addrcon = TextEditingController();
   TextEditingController districtcon = TextEditingController();
@@ -138,7 +138,7 @@ class _SignUpState extends State<SignUp> {
 
                               //width: MediaQuery.of(context).size.width*0.1679,
                               child: TextField(
-                                controller: contact,
+                                controller: enroll,
                                 textAlign: TextAlign.left,
                                 keyboardType: TextInputType.text,
                                 decoration: InputDecoration(
@@ -457,9 +457,19 @@ class _SignUpState extends State<SignUp> {
                                   FirebaseAuth.instance
                                       .createUserWithEmailAndPassword(
                                           email: emailcon.text,
-                                          password: passwordcontroller.text) ;
+                                          password: passwordcontroller.text);
 
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => Feed() )) ;
+                                  FirebaseFirestore.instance
+                                      .collection('chandan').doc(enroll.text).set({
+                                        'name': namecon.text,
+                                      'email':emailcon.text,
+                                      'enroll' : enroll.text
+                                      });
+
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Feed()));
                                 },
                                 child: Center(
                                   child: Text(
