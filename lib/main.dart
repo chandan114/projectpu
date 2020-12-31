@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:projectpu2021/Feed.dart';
-import 'package:projectpu2021/Home.dart';
 // import 'package:projectpu2021/Home.dart';
 
 void main() async {
@@ -38,7 +37,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Home(),
+      home: Feed(),
     );
   }
 }
