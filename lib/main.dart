@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:projectpu2021/Feed.dart';
 
-// chadnan chandna maurya
+// chadnan chandna
 // import 'package:projectpu2021/Home.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
