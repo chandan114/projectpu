@@ -46,13 +46,13 @@ class _SignUpState extends State<SignUp> {
 
   TextEditingController emailcon = TextEditingController();
   TextEditingController namecon = TextEditingController();
-  TextEditingController enroll = TextEditingController();
-  TextEditingController aadharcon = TextEditingController();
-  TextEditingController addrcon = TextEditingController();
-  TextEditingController districtcon = TextEditingController();
-  TextEditingController statecon = TextEditingController();
-  TextEditingController countrycon = TextEditingController();
-  TextEditingController passwordcontroller = TextEditingController();
+  TextEditingController enrollcon = TextEditingController();
+  TextEditingController departmentcon = TextEditingController();
+  TextEditingController batchcon = TextEditingController();
+  TextEditingController divcon = TextEditingController();
+  TextEditingController yearcon = TextEditingController();
+  TextEditingController collegecon = TextEditingController();
+  TextEditingController passwordcon = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +138,7 @@ class _SignUpState extends State<SignUp> {
 
                               //width: MediaQuery.of(context).size.width*0.1679,
                               child: TextField(
-                                controller: enroll,
+                                controller: enrollcon,
                                 textAlign: TextAlign.left,
                                 keyboardType: TextInputType.text,
                                 decoration: InputDecoration(
@@ -231,7 +231,7 @@ class _SignUpState extends State<SignUp> {
 
                               //width: MediaQuery.of(context).size.width*0.1679,
                               child: TextField(
-                                controller: aadharcon,
+                                controller: departmentcon,
                                 textAlign: TextAlign.left,
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
@@ -257,7 +257,7 @@ class _SignUpState extends State<SignUp> {
 
                               //width: MediaQuery.of(context).size.width*0.1679,
                               child: TextField(
-                                controller: addrcon,
+                                controller: batchcon,
                                 textAlign: TextAlign.left,
                                 keyboardType: TextInputType.text,
                                 decoration: InputDecoration(
@@ -288,7 +288,7 @@ class _SignUpState extends State<SignUp> {
                                   child: Container(
                                     //width: MediaQuery.of(context).size.width*0.1679,
                                     child: TextField(
-                                      controller: districtcon,
+                                      controller: divcon,
                                       textAlign: TextAlign.left,
                                       keyboardType: TextInputType.text,
                                       decoration: InputDecoration(
@@ -319,7 +319,7 @@ class _SignUpState extends State<SignUp> {
                                   child: Container(
                                     //width: MediaQuery.of(context).size.width*0.1679,
                                     child: TextField(
-                                      controller: statecon,
+                                      controller: yearcon,
                                       textAlign: TextAlign.left,
                                       keyboardType: TextInputType.number,
                                       decoration: InputDecoration(
@@ -354,7 +354,7 @@ class _SignUpState extends State<SignUp> {
 
                                     //width: MediaQuery.of(context).size.width*0.1679,
                                     child: TextField(
-                                      controller: countrycon,
+                                      controller: collegecon,
                                       textAlign: TextAlign.left,
                                       keyboardType: TextInputType.text,
                                       decoration: InputDecoration(
@@ -405,7 +405,7 @@ class _SignUpState extends State<SignUp> {
 
                                     //width: MediaQuery.of(context).size.width*0.1679,
                                     child: TextField(
-                                      controller: passwordcontroller,
+                                      controller: passwordcon,
                                       textAlign: TextAlign.left,
                                       keyboardType: TextInputType.text,
                                       decoration: InputDecoration(
@@ -457,14 +457,21 @@ class _SignUpState extends State<SignUp> {
                                   FirebaseAuth.instance
                                       .createUserWithEmailAndPassword(
                                           email: emailcon.text,
-                                          password: passwordcontroller.text);
+                                          password: passwordcon.text);
 
                                   FirebaseFirestore.instance
-                                      .collection('chandan').doc(enroll.text).set({
-                                        'name': namecon.text,
-                                      'email':emailcon.text,
-                                      'enroll' : enroll.text
-                                      });
+                                      .collection('stud_details')
+                                      .doc(enrollcon.text)
+                                      .set({
+                                    'name': namecon.text,
+                                    'email': emailcon.text,
+                                    'enroll': enrollcon.text,
+                                    'department': departmentcon.text,
+                                    'batch': batchcon.text,
+                                    'div': divcon.text,
+                                    'year': yearcon.text,
+                                    'college': collegecon.text,
+                                  });
 
                                   Navigator.push(
                                       context,
