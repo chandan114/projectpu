@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+=======
+// import 'dart:html';
+// heeeeellloo
+
+
+>>>>>>> a922159f4745a73516c77140ac92530adc2e4309
 import 'package:flutter/material.dart';
 
 class Feed extends StatelessWidget {
