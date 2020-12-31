@@ -1,36 +1,30 @@
-// import 'dart:html';
-// bye bye
-
-
 import 'package:flutter/material.dart';
 
 class Feed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: Icon(Icons.share),
-          )
-        ],
-        leading: Icon(Icons.menu_open),
-        backgroundColor: Colors.black87,
-        title: Padding(
-          padding: const EdgeInsets.only(right: 20.0),
-          child: Center(
-            child: Text("FEED"),
+        appBar: AppBar(
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: Icon(Icons.share),
+            )
+          ],
+          leading: Icon(Icons.menu_open),
+          backgroundColor: Colors.black87,
+          title: Padding(
+            padding: const EdgeInsets.only(right: 20.0),
+            child: Center(
+              child: Text("FEED"),
+            ),
           ),
         ),
-      ),
-      body: ListView(
-        children: [
-          Feedwidget() ,
-          
-        ],
-      )
-    );
+        body: ListView(
+          children: [
+            Feedwidget(),
+          ],
+        ));
   }
 }
 

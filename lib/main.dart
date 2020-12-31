@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:projectpu2021/Feed.dart';
 
+// chadnan sjshdsjtatu
 // import 'package:projectpu2021/Home.dart';
-// chadnan chutiya
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
