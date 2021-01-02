@@ -1,33 +1,55 @@
+//import 'package:firebase/firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Feed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: Icon(Icons.share),
-            )
-          ],
-          leading: Icon(Icons.menu_open),
-          backgroundColor: Colors.black87,
-          title: Padding(
-            padding: const EdgeInsets.only(right: 20.0),
-            child: Center(
-              child: Text("FEED"),
-            ),
+      appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: Icon(Icons.share),
+          )
+        ],
+        leading: Icon(Icons.menu_open),
+        backgroundColor: Colors.black87,
+        title: Padding(
+          padding: const EdgeInsets.only(right: 20.0),
+          child: Center(
+            child: Text("FEED"),
           ),
         ),
-        body: ListView(
-          children: [
-            Feedwidget(),
-          ],
-        ));  }
+      ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('chandan').snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) return Text("Eroor");
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return CircleAvatar();
+          } else {
+            final list = snapshot.data.docs;
+            return ListView.builder(
+              itemCount: list.length,
+              itemBuilder: (context, index) {
+                return Feedwidget(
+                  name: list[index]["name"],
+                  email: list[index]["email"],
+                );
+              },
+            );
+          }
+        },
+      ),
+    );
+  }
 }
 
 class Feedwidget extends StatefulWidget {
+  final String name;
+  final String email;
+  Feedwidget({this.name, this.email});
   @override
   _FeedwidgetState createState() => _FeedwidgetState();
 }
@@ -53,7 +75,7 @@ class _FeedwidgetState extends State<Feedwidget> {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Text(
-              "Share Market Holidays 2021: List of Days When BSE Will be Closed For Trading in Upcoming Year",
+              widget.name,
               style: TextStyle(color: Colors.white, fontSize: 18),
             ),
           ),
@@ -71,7 +93,7 @@ class _FeedwidgetState extends State<Feedwidget> {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Swipe left to see full view....",
+                widget.email,
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.white60,
@@ -106,6 +128,41 @@ class _FeedwidgetState extends State<Feedwidget> {
           //       width: MediaQuery.of(context).size.width,
           //       height: 60,
           //     ),
+          //   ),
+          // ),
+
+          // Expanded(
+          //   child: StreamBuilder<QuerySnapshot>(
+          //     stream:
+          //         FirebaseFirestore.instance.collection('chandan').snapshots(),
+          //     builder: (BuildContext context,
+          //         AsyncSnapshot<QuerySnapshot> snapshot) {
+          //       if (snapshot.hasError) return Text("Eroor");
+          //       if (snapshot.connectionState == ConnectionState.waiting) {
+          //         return CircleAvatar();
+          //       } else {
+          //         final list = snapshot.data.docs;
+          //         return ListView.builder(
+          //           itemBuilder: (context, index) {
+          //             return ListTile(
+          //               title: Text(
+          //                 list[index]["email"],
+          //                 style: TextStyle(
+          //                   color: Colors.white60,
+          //                 ),
+          //               ),
+          //               subtitle: Text(
+          //                 list[index]["name"],
+          //                 style: TextStyle(
+          //                   color: Colors.white60,
+          //                 ),
+          //               ),
+          //             );
+          //           },
+          //           itemCount: list.length,
+          //         );
+          //       }
+          //     },
           //   ),
           // ),
         ],
