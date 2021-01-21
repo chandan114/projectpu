@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:projectpu2021/Feed.dart';
+//import 'package:projectpu2021/Feed.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:projectpu2021/Login.dart';
 
 //void main() => runApp(MaterialApp(home: SignUp()));
 enum Gender { male, female }
@@ -476,7 +477,7 @@ class _SignUpState extends State<SignUp> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Feed()));
+                                          builder: (context) => Login()));
                                 },
                                 child: Center(
                                   child: Text(

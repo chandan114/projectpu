@@ -1,6 +1,7 @@
 //import 'package:firebase/firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+// changes made
 
 class Feed extends StatelessWidget {
   @override
@@ -23,7 +24,7 @@ class Feed extends StatelessWidget {
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('chandan').snapshots(),
+        stream: FirebaseFirestore.instance.collection('Details').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) return Text("Eroor");
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -34,8 +35,9 @@ class Feed extends StatelessWidget {
               itemCount: list.length,
               itemBuilder: (context, index) {
                 return Feedwidget(
-                  name: list[index]["name"],
-                  email: list[index]["email"],
+                  title: list[index]["title"],
+                  subtitle: list[index]["subtitle"],
+                  link: list[index]["link"],
                 );
               },
             );
@@ -47,9 +49,10 @@ class Feed extends StatelessWidget {
 }
 
 class Feedwidget extends StatefulWidget {
-  final String name;
-  final String email;
-  Feedwidget({this.name, this.email});
+  final String title;
+  final String subtitle;
+  final String link;
+  Feedwidget({this.title, this.subtitle, this.link});
   @override
   _FeedwidgetState createState() => _FeedwidgetState();
 }
@@ -66,7 +69,7 @@ class _FeedwidgetState extends State<Feedwidget> {
         children: [
           // image: Image.asset("./images/bombay_stock_exchange.jpg")
           Image(
-            image: AssetImage("./images/bombay_stock_exchange.jpg"),
+            image: AssetImage(widget.link),
             fit: BoxFit.contain,
             width: MediaQuery.of(context).size.width,
             // height: MediaQuery.of(context).size.height/2.2,
@@ -75,14 +78,14 @@ class _FeedwidgetState extends State<Feedwidget> {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Text(
-              widget.name,
+              widget.title,
               style: TextStyle(color: Colors.white, fontSize: 18),
             ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(15, 0, 12, 12),
             child: Text(
-              "Like every other market, the National Stock Exchange of India (NSE) and the Bombay Stock Exchange (BSE) will remain shut on different occasions and special days in the coming year. The off time will be followed by Equity Segment, Equity Derivative Segment, and SLB Segment.Muhurat Trading will take place on November 04, 2021, during the festival of Diwali, timings of which are notified later by the stock exchange.",
+              widget.subtitle,
               style: TextStyle(
                 color: Colors.white60,
               ),
@@ -93,7 +96,7 @@ class _FeedwidgetState extends State<Feedwidget> {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                widget.email,
+                "Swipe left to see full view",
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.white60,
@@ -102,15 +105,12 @@ class _FeedwidgetState extends State<Feedwidget> {
             ),
           ),
 
-          // Container(
-          //   padding: const EdgeInsets.only(top: 70),
-          //   alignment: Alignment.bottomCenter,
-          //   child: Container(
-          //    decoration: BoxDecoration(
-
-          //    ),
-          //   )
-          // ) ,
+          Container(
+              padding: const EdgeInsets.only(top: 30, right: 0.0, bottom: 0.0),
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                decoration: BoxDecoration(),
+              )),
           // Expanded(
           //   child: Align(
           //     alignment: FractionalOffset.bottomCenter,
@@ -128,41 +128,6 @@ class _FeedwidgetState extends State<Feedwidget> {
           //       width: MediaQuery.of(context).size.width,
           //       height: 60,
           //     ),
-          //   ),
-          // ),
-
-          // Expanded(
-          //   child: StreamBuilder<QuerySnapshot>(
-          //     stream:
-          //         FirebaseFirestore.instance.collection('chandan').snapshots(),
-          //     builder: (BuildContext context,
-          //         AsyncSnapshot<QuerySnapshot> snapshot) {
-          //       if (snapshot.hasError) return Text("Eroor");
-          //       if (snapshot.connectionState == ConnectionState.waiting) {
-          //         return CircleAvatar();
-          //       } else {
-          //         final list = snapshot.data.docs;
-          //         return ListView.builder(
-          //           itemBuilder: (context, index) {
-          //             return ListTile(
-          //               title: Text(
-          //                 list[index]["email"],
-          //                 style: TextStyle(
-          //                   color: Colors.white60,
-          //                 ),
-          //               ),
-          //               subtitle: Text(
-          //                 list[index]["name"],
-          //                 style: TextStyle(
-          //                   color: Colors.white60,
-          //                 ),
-          //               ),
-          //             );
-          //           },
-          //           itemCount: list.length,
-          //         );
-          //       }
-          //     },
           //   ),
           // ),
         ],

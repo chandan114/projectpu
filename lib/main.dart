@@ -1,7 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:projectpu2021/Feed.dart';
+//import 'package:projectpu2021/Feed.dart';
+import 'package:projectpu2021/Home.dart';
+import 'package:projectpu2021/Post%20.dart';
+import 'package:projectpu2021/signup.dart';
+//import 'package:projectpu2021/signup.dart';
+//import 'package:projectpu2021/Home.dart';
+import 'Feed.dart';
 
 // chadnan chandna dksndksnodfhsvodhv
 // import 'package:projectpu2021/Home.dart';
@@ -18,6 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
